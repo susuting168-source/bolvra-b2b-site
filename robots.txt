@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.bolvra.com/sitemap.xml
+Sitemap: https://www.bolvralock.com/sitemap.xml
