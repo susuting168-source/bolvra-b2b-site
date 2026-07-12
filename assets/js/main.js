@@ -263,7 +263,12 @@ const productDetails = {
   },
   'BVR-8200': {
     description: 'A smart lock solution for glass-door and commercial access applications. A useful product option for offices, shops, meeting rooms and system-installation projects.',
-    features: ['Commercial access application', 'Modern compact structure', 'Suitable for installer and project buyers']
+    features: ['Commercial access application', 'Modern compact structure', 'Suitable for installer and project buyers'],
+    gallery: [
+      { src: 'CARD_IMAGE', alt: 'BVR-8200 main product image' },
+      { src: 'assets/images/product-popup/bvr-8200-extra-1.webp', alt: 'BVR-8200 reliable dual power supply design' },
+      { src: 'assets/images/product-popup/bvr-8200-extra-2.webp', alt: 'BVR-8200 waterproof outdoor design' }
+    ]
   },
   'BVR-7100': {
     description: 'A connected smart lock concept for customers who need app-enabled access and flexible property management. Suitable for residential, rental and distributor markets.',
