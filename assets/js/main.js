@@ -250,8 +250,13 @@ const productDetails = {
     features: ['WiFi smart access concept', 'Modern handle format', 'Suitable for residential and rental markets']
   },
   'BVR-5200': {
-    description: 'A clean fingerprint door lock for residential and light project applications. Its straightforward form is suited to buyers looking for modern access control without an oversized panel.',
-    features: ['Fingerprint access', 'Compact modern design', 'Suitable for homes and apartment projects']
+    description: 'A fingerprint door lock with TTLock and Tuya app options for connected access management. It supports fingerprint, passcode, IC card and mechanical key unlocking for homes, apartments and project supply.',
+    features: ['TTLock / Tuya app unlock options', 'Fingerprint, passcode, card and key access', 'Free-handle safety design for daily use'],
+    gallery: [
+      { src: 'CARD_IMAGE', alt: 'BVR-5200 main product image' },
+      { src: 'assets/images/product-popup/bvr-5200-extra-1.webp', alt: 'BVR-5200 free handle safety design' },
+      { src: 'assets/images/product-popup/bvr-5200-extra-2.webp', alt: 'BVR-5200 five ways to unlock' }
+    ]
   },
   'BVR-3100': {
     description: 'A slim door-lock solution focused on simple daily use and modern styling. It is positioned for distributors and installers serving residential and standard project applications.',
