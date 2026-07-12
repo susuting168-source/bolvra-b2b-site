@@ -276,8 +276,13 @@ const productDetails = {
     ]
   },
   'BVR-7100': {
-    description: 'A connected smart lock concept for customers who need app-enabled access and flexible property management. Suitable for residential, rental and distributor markets.',
-    features: ['Tuya / WiFi smart access concept', 'Remote property-management positioning', 'Suitable for homes and rental properties']
+    description: 'A connected smart lock solution with TTLock and Tuya app options for flexible access management. It supports fingerprint, passcode, IC card and mechanical key unlocking, and can be matched with multiple mortise lock body models for residential, rental and project installations.',
+    features: ['TTLock / Tuya app unlock options', 'Fingerprint, passcode, card and key access', 'Supports multiple mortise lock body models'],
+    gallery: [
+      { src: 'CARD_IMAGE', alt: 'BVR-7100 main product image' },
+      { src: 'assets/images/product-popup/bvr-7100-extra-1.webp', alt: 'BVR-7100 smart access and app unlock feature' },
+      { src: 'assets/images/product-popup/bvr-7100-extra-2.webp', alt: 'BVR-7100 multiple mortise lock body compatibility' }
+    ]
   },
   'BVR-3000': {
     description: 'A compact smart-security solution designed for flexible access applications. Its portable format makes it suitable for buyers looking to extend a broader smart-lock product range.',
