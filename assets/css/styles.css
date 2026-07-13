@@ -1261,3 +1261,40 @@ body.product-modal-open{overflow:hidden}
   .product-modal-copy h2{font-size:34px}
   .product-modal-description{font-size:14px;line-height:1.6}
 }
+
+
+/* Performance: defer below-the-fold rendering and keep mobile carousels compositor-free. */
+.oem-section,
+.company-profile,
+.advantage-section,
+.process-section,
+.factory-section,
+.strength-section,
+.certificate-section-code,
+.exhibition-section,
+.seo-faq-section,
+.industry-blog-section,
+.quote-section{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 720px;
+}
+
+@media(max-width:720px), (prefers-reduced-motion:reduce){
+  .feature-slider,
+  .exhibition-slider{
+    overflow-x:auto;
+    overscroll-behavior-inline:contain;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .feature-slider::-webkit-scrollbar,
+  .exhibition-slider::-webkit-scrollbar{display:none}
+  .feature-track,
+  .exhibition-track{
+    transform:none!important;
+    will-change:auto;
+    scroll-snap-type:x proximity;
+  }
+  .feature-card,
+  .exhibition-track img{scroll-snap-align:start}
+}

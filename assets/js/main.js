@@ -37,47 +37,6 @@ categoryButtons.forEach(btn => {
   const track = document.querySelector("[data-feature-track]");
   if (!slider || !track) return;
 
-  const originals = Array.from(track.children);
-  const originalCount = originals.length;
-  originals.forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.classList.add("is-clone");
-    track.appendChild(clone);
-  });
-
-  let offset = 0;
-  let speed = window.innerWidth <= 720 ? 0.35 : 0.55;
-  let singleSetWidth = 0;
-  let rafId = null;
-  let paused = false;
-
-  function measure(){
-    speed = window.innerWidth <= 720 ? 0.35 : 0.55;
-    const cards = Array.from(track.children).slice(0, originalCount);
-    singleSetWidth = cards.reduce((sum, card, index) => {
-      const styles = getComputedStyle(card);
-      const gap = index === cards.length - 1 ? 0 : parseFloat(getComputedStyle(track).gap || 18);
-      return sum + card.getBoundingClientRect().width + gap;
-    }, 0);
-  }
-
-  function loop(){
-    if (!paused) {
-      offset += speed;
-      if (offset >= singleSetWidth) offset -= singleSetWidth;
-      track.style.transform = `translate3d(${-offset}px,0,0)`;
-    }
-    rafId = requestAnimationFrame(loop);
-  }
-
-  function start(){
-    cancelAnimationFrame(rafId);
-    measure();
-    loop();
-  }
-
-  slider.addEventListener("mouseenter", () => { paused = true; slider.classList.add("is-paused"); });
-  slider.addEventListener("mouseleave", () => { paused = false; slider.classList.remove("is-paused"); });
   track.addEventListener("click", e => {
     const card = e.target.closest(".feature-card");
     if (!card) return;
@@ -87,8 +46,77 @@ categoryButtons.forEach(btn => {
       document.querySelector("#products")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   });
-  window.addEventListener("resize", measure);
-  start();
+
+  const useStaticSlider = window.innerWidth <= 720 || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (useStaticSlider) {
+    slider.classList.add("is-static");
+    return;
+  }
+
+  let initialized = false;
+  let offset = 0;
+  let singleSetWidth = 0;
+  let rafId = null;
+  let paused = false;
+  let visible = false;
+
+  function measure(){
+    const cards = Array.from(track.children).filter(card => !card.classList.contains("is-clone"));
+    const gap = parseFloat(getComputedStyle(track).gap || 18);
+    singleSetWidth = cards.reduce((sum, card, index) => {
+      return sum + card.offsetWidth + (index === cards.length - 1 ? 0 : gap);
+    }, 0);
+  }
+
+  function loop(){
+    if (!visible || paused || document.hidden) {
+      rafId = null;
+      return;
+    }
+    offset += 0.55;
+    if (offset >= singleSetWidth) offset -= singleSetWidth;
+    track.style.transform = `translate3d(${-offset}px,0,0)`;
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function startLoop(){
+    if (!rafId && initialized && singleSetWidth > 0 && visible && !paused && !document.hidden) rafId = requestAnimationFrame(loop);
+  }
+
+  function stopLoop(){
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  function setup(){
+    if (initialized) return;
+    initialized = true;
+    Array.from(track.children).forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add("is-clone");
+      track.appendChild(clone);
+    });
+    measure();
+    startLoop();
+  }
+
+  slider.addEventListener("mouseenter", () => { paused = true; stopLoop(); slider.classList.add("is-paused"); });
+  slider.addEventListener("mouseleave", () => { paused = false; slider.classList.remove("is-paused"); startLoop(); });
+  window.addEventListener("resize", () => { if (initialized) requestAnimationFrame(measure); }, { passive: true });
+  document.addEventListener("visibilitychange", () => { document.hidden ? stopLoop() : startLoop(); });
+
+  const observer = new IntersectionObserver(entries => {
+    visible = entries[0]?.isIntersecting || false;
+    if (!visible) {
+      stopLoop();
+      return;
+    }
+    const initialize = () => setup();
+    if ("requestIdleCallback" in window) requestIdleCallback(initialize, { timeout: 1800 });
+    else setTimeout(initialize, 350);
+    startLoop();
+  }, { rootMargin: "120px 0px" });
+  observer.observe(slider);
 })();
 
 // OEM & ODM interaction
@@ -96,27 +124,27 @@ const oemData = {
   panel: {
     title: "Custom Lock Panel",
     desc: "Customize logo, surface finish, color and front-panel appearance to match your brand identity.",
-    visual: `<img class="oem-media oem-product-img" src="assets/images/optimized/face_alt.webp" alt="Custom lock panel">`
+    visual: `<img class="oem-media oem-product-img" src="assets/images/optimized/face_alt.webp" alt="Custom lock panel" loading="lazy" decoding="async">`
   },
   package: {
     title: "Custom Package",
     desc: "Customize your logo and company information on the packaging to enhance your brand image and market competitiveness.",
-    visual: `<img class="oem-media" src="assets/images/generated/oem-package.webp" alt="Custom package">`
+    visual: `<img class="oem-media" src="assets/images/generated/oem-package.webp" alt="Custom package" loading="lazy" decoding="async">`
   },
   cards: {
     title: "Custom Smart Cards",
     desc: "Support customized IC cards, RFID cards and hotel cards with color printing and brand information.",
-    visual: `<img class="oem-media" src="assets/images/generated/oem-cards.webp" alt="Custom smart cards">`
+    visual: `<img class="oem-media" src="assets/images/generated/oem-cards.webp" alt="Custom smart cards" loading="lazy" decoding="async">`
   },
   structure: {
     title: "Structure & Functions",
     desc: "Adjust mortise, unlock methods, handle structure and module combinations for different project needs.",
-    visual: `<img class="oem-media" src="assets/images/generated/oem-structure.webp" alt="Custom structure and functions">`
+    visual: `<img class="oem-media" src="assets/images/generated/oem-structure.webp" alt="Custom structure and functions" loading="lazy" decoding="async">`
   },
   software: {
     title: "App & Software",
     desc: "Support Tuya, TTLock and software integration discussions for smart home and project applications.",
-    visual: `<img class="oem-media" src="assets/images/generated/oem-app.webp" alt="Tuya and TTLock smart lock app interface">`
+    visual: `<img class="oem-media" src="assets/images/generated/oem-app.webp" alt="Tuya and TTLock smart lock app interface" loading="lazy" decoding="async">`
   }
 };
 function setOem(key) {
@@ -204,48 +232,76 @@ function focusInquiryForm(interest) {
   const track = document.querySelector('[data-exhibition-track]');
   if (!slider || !track) return;
 
-  const originals = Array.from(track.children);
-  const originalCount = originals.length;
-  originals.forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.classList.add('is-clone');
-    track.appendChild(clone);
-  });
+  const useStaticSlider = window.innerWidth <= 720 || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (useStaticSlider) {
+    slider.classList.add('is-static');
+    return;
+  }
 
+  let initialized = false;
   let offset = 0;
-  let speed = window.innerWidth <= 720 ? 0.32 : 0.45;
   let singleSetWidth = 0;
   let rafId = null;
   let paused = false;
+  let visible = false;
 
   function measure(){
-    speed = window.innerWidth <= 720 ? 0.32 : 0.45;
-    const cards = Array.from(track.children).slice(0, originalCount);
+    const cards = Array.from(track.children).filter(card => !card.classList.contains('is-clone'));
     const gap = parseFloat(getComputedStyle(track).gap || 16);
     singleSetWidth = cards.reduce((sum, card, index) => {
-      return sum + card.getBoundingClientRect().width + (index === cards.length - 1 ? 0 : gap);
+      return sum + card.offsetWidth + (index === cards.length - 1 ? 0 : gap);
     }, 0);
   }
 
   function loop(){
-    if (!paused) {
-      offset += speed;
-      if (offset >= singleSetWidth) offset -= singleSetWidth;
-      track.style.transform = `translate3d(${-offset}px,0,0)`;
+    if (!visible || paused || document.hidden) {
+      rafId = null;
+      return;
     }
+    offset += 0.45;
+    if (offset >= singleSetWidth) offset -= singleSetWidth;
+    track.style.transform = `translate3d(${-offset}px,0,0)`;
     rafId = requestAnimationFrame(loop);
   }
 
-  function start(){
-    cancelAnimationFrame(rafId);
-    measure();
-    loop();
+  function startLoop(){
+    if (!rafId && initialized && singleSetWidth > 0 && visible && !paused && !document.hidden) rafId = requestAnimationFrame(loop);
   }
 
-  slider.addEventListener('mouseenter', () => { paused = true; slider.classList.add('is-paused'); });
-  slider.addEventListener('mouseleave', () => { paused = false; slider.classList.remove('is-paused'); });
-  window.addEventListener('resize', measure);
-  start();
+  function stopLoop(){
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  function setup(){
+    if (initialized) return;
+    initialized = true;
+    Array.from(track.children).forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add('is-clone');
+      track.appendChild(clone);
+    });
+    measure();
+    startLoop();
+  }
+
+  slider.addEventListener('mouseenter', () => { paused = true; stopLoop(); slider.classList.add('is-paused'); });
+  slider.addEventListener('mouseleave', () => { paused = false; slider.classList.remove('is-paused'); startLoop(); });
+  window.addEventListener('resize', () => { if (initialized) requestAnimationFrame(measure); }, { passive: true });
+  document.addEventListener('visibilitychange', () => { document.hidden ? stopLoop() : startLoop(); });
+
+  const observer = new IntersectionObserver(entries => {
+    visible = entries[0]?.isIntersecting || false;
+    if (!visible) {
+      stopLoop();
+      return;
+    }
+    const initialize = () => setup();
+    if ('requestIdleCallback' in window) requestIdleCallback(initialize, { timeout: 1800 });
+    else setTimeout(initialize, 350);
+    startLoop();
+  }, { rootMargin: '120px 0px' });
+  observer.observe(slider);
 })();
 
 
@@ -322,7 +378,7 @@ function renderModalGallery(items, activeIndex = 0) {
   modalImage.alt = items[safeIndex].alt || 'BOLVRA product image';
   modalThumbs.innerHTML = items.map((item, index) => `
     <button class="product-modal-thumb ${index === safeIndex ? 'is-active' : ''}" type="button" data-gallery-index="${index}" aria-label="View product image ${index + 1}">
-      <img src="${item.src}" alt="${item.alt || 'Product thumbnail'}">
+      <img src="${item.src}" alt="${item.alt || 'Product thumbnail'}" loading="lazy" decoding="async">
     </button>
   `).join('');
   modalThumbs.querySelectorAll('[data-gallery-index]').forEach(btn => {
