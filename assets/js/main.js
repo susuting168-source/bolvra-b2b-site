@@ -169,9 +169,24 @@ whatsappForm?.addEventListener('submit', e => {
 
 function focusInquiryForm(interest) {
   if (productField) {
+    const lowerInterest = interest.toLowerCase();
     const options = Array.from(productField.options).map(opt => opt.value);
-    const match = options.find(opt => opt && interest.toLowerCase().includes(opt.toLowerCase()));
-    productField.value = match || 'Other';
+    const keywordMap = [
+      ['face', 'Face Door Lock'],
+      ['glass', 'Aluminum Profile Smart Lock'],
+      ['aluminum', 'Aluminum Profile Smart Lock'],
+      ['tuya', 'WiFi / Tuya Smart Lock'],
+      ['ttlock', 'WiFi / Tuya Smart Lock'],
+      ['wifi', 'WiFi / Tuya Smart Lock'],
+      ['zigbee', 'Zigbee Door Lock'],
+      ['fingerprint', 'Fingerprint Handle Lock'],
+      ['access control', 'Access Control'],
+      ['padlock', 'Access Control'],
+      ['hotel', 'Hotel Door Lock']
+    ];
+    const directMatch = options.find(opt => opt && lowerInterest.includes(opt.toLowerCase()));
+    const keywordMatch = keywordMap.find(([keyword, value]) => lowerInterest.includes(keyword) && options.includes(value));
+    productField.value = directMatch || keywordMatch?.[1] || 'Other';
   }
   const requirements = whatsappForm?.querySelector('[name="requirements"]');
   if (requirements && !requirements.value) {
@@ -364,6 +379,12 @@ function closeProductModal() {
 
 document.querySelectorAll('.product-card-clickable').forEach(card => {
   card.addEventListener('click', e => {
+    const inquiryLink = e.target.closest('[data-interest]');
+    if (inquiryLink) {
+      e.preventDefault();
+      focusInquiryForm(inquiryLink.dataset.interest || card.querySelector('h3')?.textContent || 'BOLVRA product');
+      return;
+    }
     e.preventDefault();
     openProductModal(card);
   });
@@ -381,4 +402,15 @@ productModal?.querySelectorAll('[data-product-modal-close]').forEach(el => {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && productModal?.classList.contains('is-open')) closeProductModal();
+});
+
+
+document.querySelectorAll('[data-category-jump]').forEach(link => {
+  link.addEventListener('click', e => {
+    const category = link.dataset.categoryJump;
+    if (!category) return;
+    e.preventDefault();
+    filterProducts(category);
+    document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 });
