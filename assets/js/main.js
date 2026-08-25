@@ -437,6 +437,7 @@ document.querySelectorAll('.product-card-clickable').forEach(card => {
   card.addEventListener('click', e => {
     const inquiryLink = e.target.closest('[data-interest]');
     if (inquiryLink) {
+      if (inquiryLink.dataset.productPage === 'true') return;
       e.preventDefault();
       focusInquiryForm(inquiryLink.dataset.interest || card.querySelector('h3')?.textContent || 'BOLVRA product');
       return;
