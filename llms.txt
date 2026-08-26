@@ -1,0 +1,29 @@
+# BOLVRA
+
+> BOLVRA is a smart lock manufacturer and OEM/ODM supplier for distributors, installers and project buyers.
+
+## Official pages
+
+- [Homepage](https://www.bolvralock.com/): Smart lock categories, OEM/ODM services, company information and buyer FAQs.
+- [Support](https://www.bolvralock.com/support.html): Product and project support information.
+- [Warranty](https://www.bolvralock.com/warranty.html): General B2B warranty guidance.
+- [Shipping Policy](https://www.bolvralock.com/shipping-policy.html): Shipping and commercial terms guidance.
+- [Returns Policy](https://www.bolvralock.com/returns-policy.html): General B2B returns guidance.
+
+## Product pages
+
+- [BVR-6100](https://www.bolvralock.com/product-bvr-6100.html): 3D face recognition smart lock for residential, villa and project applications.
+- [BVR-5200](https://www.bolvralock.com/product-bvr-5200.html): Fingerprint door lock with TTLock and Tuya app options.
+- [BVR-7100](https://www.bolvralock.com/product-bvr-7100.html): Smart lock with TTLock and Tuya app options and multiple mortise lock body models.
+- [BVR-8200](https://www.bolvralock.com/product-bvr-8200.html): Glass door lock for commercial access applications.
+
+## Buyer resources
+
+- [Smart Lock OEM Projects](https://www.bolvralock.com/blog-smart-lock-oem.html): Checklist for evaluating a smart lock manufacturer.
+- [TTLock vs Tuya](https://www.bolvralock.com/blog-ttlock-vs-tuya.html): Project questions to confirm when sourcing app smart locks.
+- [Mortise Compatibility](https://www.bolvralock.com/blog-mortise-compatibility.html): Door and lock body information to prepare before ordering.
+
+## Contact
+
+- [Request a Quote](https://www.bolvralock.com/#contact): Send product, quantity and project requirements to BOLVRA.
+- [Sitemap](https://www.bolvralock.com/sitemap.xml)
