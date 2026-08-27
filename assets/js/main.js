@@ -2,8 +2,22 @@ const INQUIRY_EMAIL = "sales@bolvra.com";
 
 const navToggle = document.querySelector("[data-nav-toggle]");
 const nav = document.querySelector("[data-nav]");
-navToggle?.addEventListener("click", () => nav?.classList.toggle("open"));
-document.querySelectorAll(".main-nav a").forEach(link => link.addEventListener("click", () => nav?.classList.remove("open")));
+navToggle?.addEventListener("click", () => {
+  const isOpen = nav?.classList.toggle("open") || false;
+  navToggle.setAttribute("aria-expanded", String(isOpen));
+  navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+});
+document.querySelectorAll(".main-nav a").forEach(link => link.addEventListener("click", () => {
+  nav?.classList.remove("open");
+  navToggle?.setAttribute("aria-expanded", "false");
+  navToggle?.setAttribute("aria-label", "Open navigation");
+}));
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape" || !nav?.classList.contains("open")) return;
+  nav.classList.remove("open");
+  navToggle?.setAttribute("aria-expanded", "false");
+  navToggle?.setAttribute("aria-label", "Open navigation");
+});
 
 // Product category filtering: hover on the left menu to switch product groups
 const categoryButtons = document.querySelectorAll(".cat-link[data-category]");
@@ -94,6 +108,7 @@ categoryButtons.forEach(btn => {
     Array.from(track.children).forEach(card => {
       const clone = card.cloneNode(true);
       clone.classList.add("is-clone");
+      clone.setAttribute("aria-hidden", "true");
       track.appendChild(clone);
     });
     measure();
@@ -279,6 +294,7 @@ function focusInquiryForm(interest) {
     Array.from(track.children).forEach(card => {
       const clone = card.cloneNode(true);
       clone.classList.add('is-clone');
+      clone.setAttribute('aria-hidden', 'true');
       track.appendChild(clone);
     });
     measure();

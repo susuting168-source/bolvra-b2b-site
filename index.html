@@ -84,8 +84,8 @@
       <a class="brand" href="#top" aria-label="BOLVRA Home">
         <img class="brand-logo" src="assets/images/brand/bolvra-logo-dark.png" alt="BOLVRA logo - Precision Every Entry" width="194" height="42" />
       </a>
-      <button class="nav-toggle" data-nav-toggle aria-label="Open navigation"><i></i><i></i><i></i></button>
-      <nav class="main-nav" data-nav>
+      <button class="nav-toggle" data-nav-toggle aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation"><i></i><i></i><i></i></button>
+      <nav id="site-navigation" class="main-nav" data-nav>
         <a class="active" href="#top">Home</a>
         <a href="#products">Products</a>
         <a href="#solutions">Solutions</a>
@@ -104,6 +104,7 @@
       </nav>
       <div class="header-right">
         <a class="btn btn-head" href="#contact">Get a Quote</a>
+        <a class="btn btn-whatsapp-head" href="https://wa.me/8615277383017?text=Hello%20BOLVRA%20team%2C%20I%20would%20like%20to%20request%20a%20smart%20lock%20quote." target="_blank" rel="noopener" aria-label="Chat with BOLVRA on WhatsApp">WhatsApp</a>
         <span class="lang">◎ EN⌄</span>
       </div>
     </div>
@@ -516,19 +517,19 @@
               <div class="quote-grid">
                 <label>
                   <span>Your Name *</span>
-                  <input type="text" name="customerName" placeholder="e.g. David Lee" required>
+                  <input type="text" name="customerName" autocomplete="name" placeholder="e.g. David Lee" required>
                 </label>
                 <label>
                   <span>Company Name *</span>
-                  <input type="text" name="companyName" placeholder="e.g. ABC Distribution" required>
+                  <input type="text" name="companyName" autocomplete="organization" placeholder="e.g. ABC Distribution" required>
                 </label>
                 <label>
                   <span>Email Address *</span>
-                  <input type="email" name="email" placeholder="e.g. purchasing@company.com" required>
+                  <input type="email" name="email" autocomplete="email" placeholder="e.g. purchasing@company.com" required>
                 </label>
                 <label>
                   <span>WhatsApp / Phone *</span>
-                  <input type="text" name="phone" placeholder="e.g. +971 50 123 4567" required>
+                  <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="e.g. +971 50 123 4567" required>
                 </label>
                 <label>
                   <span>Product Type *</span>

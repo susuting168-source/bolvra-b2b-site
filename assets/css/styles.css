@@ -1303,3 +1303,24 @@ body.product-modal-open{overflow:hidden}
   .feature-card,
   .exhibition-track img{scroll-snap-align:start}
 }
+
+/* V41: reduce layout shift and improve mobile interaction stability. */
+.feature-visual,
+.product-card > img,
+.profile-card > img,
+.advantage-collage > img,
+.process-flow .step > img,
+.factory-grid figure > img,
+.strength-photo > img,
+.exhibition-track > img{
+  aspect-ratio:4/3;
+}
+.feature-card > .feature-visual img{aspect-ratio:1/1;object-fit:contain;}
+.product-card > img{object-fit:cover;}
+.profile-card > img,.advantage-collage > img,.process-flow .step > img,
+.factory-grid figure > img,.strength-photo > img,.exhibition-track > img{object-fit:cover;}
+.nav-toggle{flex:0 0 42px;min-width:42px;min-height:42px;}
+@media(max-width:720px){
+  .header-right .btn-head{padding-inline:12px;}
+  .floating-whatsapp{min-height:48px;}
+}
