@@ -969,6 +969,7 @@
 /* V33: product detail modal with WhatsApp quote */
 .product-card-clickable{cursor:pointer}
 .product-card-clickable:focus-visible{outline:3px solid #5fd7ff;outline-offset:3px}
+.cat-link:focus-visible,.oem-tab:focus-visible,.product-card a:focus-visible,.btn:focus-visible{outline:3px solid #5fd7ff;outline-offset:3px}
 body.product-modal-open{overflow:hidden}
 .product-modal{
   position:fixed;

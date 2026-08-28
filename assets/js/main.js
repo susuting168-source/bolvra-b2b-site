@@ -26,6 +26,7 @@ const products = document.querySelectorAll(".product-card");
 function filterProducts(category) {
   categoryButtons.forEach(btn => {
     btn.classList.toggle("active", btn.dataset.category === category);
+    btn.setAttribute("aria-pressed", String(btn.dataset.category === category));
   });
 
   products.forEach(card => {
@@ -34,6 +35,10 @@ function filterProducts(category) {
     card.hidden = !shouldShow;
   });
 }
+
+categoryButtons.forEach(btn => {
+  btn.setAttribute("aria-pressed", btn.classList.contains("active") ? "true" : "false");
+});
 
 categoryButtons.forEach(btn => {
   const activate = () => {
