@@ -2,54 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.bolvralock.com/</loc>
+    <lastmod>2026-08-28</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/support.html</loc>
+    <lastmod>2026-07-12</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/shipping-policy.html</loc>
+    <lastmod>2026-07-12</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/returns-policy.html</loc>
+    <lastmod>2026-07-12</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/warranty.html</loc>
+    <lastmod>2026-07-12</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/product-bvr-6100.html</loc>
+    <lastmod>2026-08-25</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/product-bvr-5200.html</loc>
+    <lastmod>2026-08-25</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/product-bvr-7100.html</loc>
+    <lastmod>2026-08-25</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/product-bvr-8200.html</loc>
+    <lastmod>2026-08-25</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/blog-smart-lock-oem.html</loc>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/blog-ttlock-vs-tuya.html</loc>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/blog-mortise-compatibility.html</loc>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bolvralock.com/blog-smart-lock-quality-control.html</loc>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
 </urlset>
